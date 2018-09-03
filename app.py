@@ -3,6 +3,7 @@ import json
 import requests
 from diamondprice import diamondprice
 from placevalue import placevalue
+from rportconnect import connectdb
 #from writeindb import writeindb
 
 # ตรง YOURSECRETKEY ต้องนำมาใส่เองครับจะกล่าวถึงในขั้นตอนต่อๆ ไป
@@ -32,8 +33,31 @@ def bot():
     replyToken = msg_in_json["events"][0]['replyToken']
     
     # ส่วนนี้ดึงข้อมูลพื้นฐานออกมาจาก json (เผื่อ)
-    #userID =  msg_in_json["events"][0]['source']['userId']
-#    msgType =  msg_in_json["events"][0]['message']['type']
+    userID = msg_in_json["events"][0]['source']['userId']
+    msgType = msg_in_json["events"][0]['message']['type']
+    if msgType == 'group':
+        groupID = msg_in_json["events"][0]['source']['groupId']
+    else:
+        groupID = '00000000'
+        
+    textMsg = msg_in_json["events"][0]['message']['text']
+    textType =msg_in_json["events"][0]['message']['type']
+    textId = msg_in_json["events"][0]['message']['id']
+    conn = connectdb('_rRapaport')
+    tablename = 'collectiondata'
+    c = conn.cursor()
+    def create_table():
+        c.execute("CREATE TABLE IF NOT EXISTS '{}'(userID TEXT, msgType TEXT, groupID TEXT, textMsg TEXT, textType TEXT, textId TEXT)".format(tablename))
+    
+    def data_entry():
+        c.execute("INSERT INTO '{}' VALUES('{}', '{}', '{}', '{}', '{}', '{}')".format(tablename, userID, msgType, groupID, textMsg, textType, textId))
+        
+    conn.commit()
+    c.close()
+    conn.close()
+    
+    create_table()
+    data_entry()    
     
     # ตรวจสอบว่า ที่ส่งเข้ามาเป็น text รึป่าว (อาจเป็น รูป, location อะไรแบบนี้ได้ครับ)
     # แต่ก็สามารถประมวลผลข้อมูลประเภทอื่นได้นะครับ
