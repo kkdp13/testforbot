@@ -51,12 +51,11 @@ def bot():
     
     def data_entry():
         c.execute("INSERT INTO '{}' VALUES('{}', '{}', '{}', '{}', '{}', '{}')".format(tablename, userID, msgType, groupID, textMsg, textType, textId))
-        
-    conn.commit()
-    c.close()
-    conn.close()
+        conn.commit()
+        c.close()
+        conn.close()
     
-    create_table()
+#    create_table()
     data_entry()    
     
     # ตรวจสอบว่า ที่ส่งเข้ามาเป็น text รึป่าว (อาจเป็น รูป, location อะไรแบบนี้ได้ครับ)
