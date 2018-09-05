@@ -117,7 +117,7 @@ def bot():
         replyQueue.append(discounttext)
         reply(replyToken, replyQueue[:5])        
         return 'OK', 200
-    if textstart == '=':
+    elif textstart == '=':
 #        text = '=111111111,222222222'
         price1 = text.split(',')[0]
         price1 = price1[1:]
