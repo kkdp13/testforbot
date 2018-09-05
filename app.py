@@ -89,35 +89,35 @@ def bot():
     #replyQueue.append('นี่คือรูปแบบข้อความที่รับส่ง')
     
     # ทดลอง Echo ข้อความกลับไปในรูปแบบที่ส่งไปมา (แบบ json)
-    if textstart == '/':  
-        #text = '/r,2.34,d,vvs1,30'
-        diamondshape = text.split(',')[0]
-        diamondshape = diamondshape[1]
-        carat = text.split(',')[1]
-        color = text.split(',')[2]
-        clarity = text.split(',')[3]
-        discount = text.split(',')[4]
-        price = diamondprice(diamondshape,carat,color,clarity,discount)
-        newprice = placevalue(price['calprice'])
-        newpriceusd = placevalue(price['calpriceusd'])
-#        calprice,caratport,newprice,rate
-#        replyQueue.append(diamondshape)
-#        replyQueue.append(carat)
-#        replyQueue.append(color)
-#        replyQueue.append(clarity)
-        newpriceusdtext = 'total price is {} USD'.format(newpriceusd)
-        newpricetext = 'total price is {} THB'.format(newprice)
-        rapaportpricetext = 'the rapaport is {}'.format(price['rapaportprice'])
-        currencytext = 'the superrich rate is {}'.format(price['currency'])
-        discounttext = 'the discount is {}%'.format(price['discount'])
-        replyQueue.append(newpriceusdtext)
-        replyQueue.append(newpricetext)
-        replyQueue.append(rapaportpricetext)
-        replyQueue.append(currencytext)
-        replyQueue.append(discounttext)
-        reply(replyToken, replyQueue[:5])        
-        return 'OK', 200
-    elif textstart == '=':
+#    if textstart == '/':  
+#        #text = '/r,2.34,d,vvs1,30'
+#        diamondshape = text.split(',')[0]
+#        diamondshape = diamondshape[1]
+#        carat = text.split(',')[1]
+#        color = text.split(',')[2]
+#        clarity = text.split(',')[3]
+#        discount = text.split(',')[4]
+#        price = diamondprice(diamondshape,carat,color,clarity,discount)
+#        newprice = placevalue(price['calprice'])
+#        newpriceusd = placevalue(price['calpriceusd'])
+##        calprice,caratport,newprice,rate
+##        replyQueue.append(diamondshape)
+##        replyQueue.append(carat)
+##        replyQueue.append(color)
+##        replyQueue.append(clarity)
+#        newpriceusdtext = 'total price is {} USD'.format(newpriceusd)
+#        newpricetext = 'total price is {} THB'.format(newprice)
+#        rapaportpricetext = 'the rapaport is {}'.format(price['rapaportprice'])
+#        currencytext = 'the superrich rate is {}'.format(price['currency'])
+#        discounttext = 'the discount is {}%'.format(price['discount'])
+#        replyQueue.append(newpriceusdtext)
+#        replyQueue.append(newpricetext)
+#        replyQueue.append(rapaportpricetext)
+#        replyQueue.append(currencytext)
+#        replyQueue.append(discounttext)
+#        reply(replyToken, replyQueue[:5])        
+#        return 'OK', 200
+    if textstart == '=':
 #        text = '=111111111,222222222'
         price1 = text.split(',')[0]
         price1 = price1[1:]
